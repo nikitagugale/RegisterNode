@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    
+</head>
+<style>
+  body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  }
+  main{
+  padding-top: 400px;
+  right: 150px;
+}
+
+ .vertical-nav {
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+}
+#sidebar.active {
+  margin-left: -17rem;
+}
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+.text-gray {
+  color: #aaa;
+}
+.nav-link{
+    text-transform: capitalize;
+}
+.nav-link:hover{
+    background:#f3f2f2;
+}
+.text-primary{
+    color:#7579e7 !important;
+}
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+  #content.active {
+    margin-left: 17rem;
+    width: calc(100% - 17rem);
+  }
+}
+main{
+  padding-top: 100px;
+  padding-right:100px;
+}
+/*Refund table*/
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+ padding: 50px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+  margin-left: 12%;
+}
+
+
+</style>
+<body>
+<!-- Vertical navbar -->
+<div class="container1">
+<div class="vertical-nav bg-gradient-primary" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <img loading="lazy" src="./Images/avtar.png" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0 text-capitalize"><%=suser.firstname%></h4>
+        <p class="font-weight-normal text-muted mb-0"><%=suser.role%></p>
+      </div>
+    </div>
+  </div>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="PortfolioI.html" class="nav-link text-dark bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                Portfolio
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="AboutTokensI.html" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                About Tokens
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="/transactionI" class="nav-link text-dark">
+                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                Transaction
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Gallery
+            </a>
+    </li>
+  </ul>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Pannel</p>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="Investorpan.html" class="nav-link text-dark">
+                <i class="fa fa-user mr-3 text-primary fa-fw"></i>
+                Investor Pannel
+            </a>
+    </li>
+    
+    <li class="nav-item">
+        <a href="/login" class="nav-link text-dark">
+                  <i class="fa fa-sign-out mr-3 text-primary fa-fw"></i>
+                 Log Out
+              </a>
+      </li>
+
+
+
+    
+  </ul>
+</div>
+
+<!-- End vertical navbar -->
+</div>
+
+<!-- Page content holder -->
+<div class="page-content p-5" id="content">
+  <!-- Toggle button -->
+  <button id="sidebarCollapse" type="button" class="btn btn-primary bg-primary rounded-pill shadow-sm px-4 mb-4 d-block d-sm-none"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
+
+  <div class="row">
+    <div class="card-deck">
+   <!-- <div class="col-xl-3 col-md-5 mb-5">-->
+      <div class="card border-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs text-primary mb-1">Token Name<i class="fas fa-money-check-alt fa-2x"></i></div>
+                <div class="h5 mb-0 text-primary">MyToken</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    <!--</div>
+ <div class="col-xl-3 col-md-5 mb-5">-->
+      <div class="card border-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs  text-primary  mb-1">Token Symbol  <i class="fab fa-ethereum fa-2x"></i></div>
+                <div class="h5 mb-0 text-primary">MTK</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    <!-- </div>
+    <div class="col-xl-3 col-md-5 mb-5">-->
+      <div class="card border-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs  text-primary  mb-1">Token Sold  <i class="fas fa-funnel-dollar fa-2x"></i></div>
+                <div class="h5 mb-0 text-primary">1000</div>
+              </div>
+            </div>
+        </div>
+      </div>
+     <!--</div>
+    <div class="col-xl-3 col-md-5 mb-5">-->
+      <div class="card border-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs text-primary mb-1">Total Supply<i class="fas fa-money-bill fa-2x"></i></div>
+                <div class="h5 mb-0 text-primary">100</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    <!--</div>
+     <div class="col-xl-3 col-md-5 mb-5">-->
+        <div class="card border-primary shadow h-100 py-2">
+          <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs text-primary mb-1">Remaining Tokens<i class="fas fa-money-check-alt fa-2x"></i></div>
+                  <div class="h5 mb-0 text-primary">25</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      <!--</div>-->
+
+    </div>
+</div>
+
+
+
+
+
+    <br><br>
+
+    
+
+
+    <div class="row" style="margin-left: 25%;">
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-primary shadow h-100 py-2">
+          <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs text-primary mb-1">Start Date</div>
+                  <div class="h5 mb-0 text-primary">12:00<br>1 March,21<br>IST</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-primary shadow h-100 py-2">
+          <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs  text-primary  mb-1">End Date</div>
+                  <div class="h5 mb-0 text-primary">12:00<br>15 March,21<br>IST</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+      <div class="input-group mb-3">
+        <input type="text" id="transachash" name="transachash" class="form-control border-primary" placeholder="Transaction Hash" aria-label="Owners address"  aria-describedby="button-addon2"/>
+         <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button" formaction="/transactionI" formmethod="POST">Submit</button>
+        </div>
+        
+    </div>
+    
+    <label style="color: blue; font: sans-serif; font-size: 11px; margin-bottom: 0%;">Owner Address</label>
+   <div class="input-group mb-3">
+      <input type="text" id="owneraddress" name="owneraddress" class="form-control border-primary" value="0xd034739c2ae957c70cd708092b946f62a49509d8" readonly>
+     <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" onclick="copyclipboard()">copy</button>
+     </div>
+    </div>
+
+<script>
+  function copyclipboard() {
+  /* Get the text field */
+  var copyText = document.getElementById("owneraddress");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text
+  alert("Copied the text: " + copyText.value); */
+}
+</script>
+
+
+
+
+
+ 
+
+  
+  
+  
+            
+<!-- End demo content -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<script>
+  $(function() {
+// Sidebar toggle behavior
+$('#sidebarCollapse').on('click', function() {
+  $('#sidebar, #content').toggleClass('active');
+});
+});
+</script>
+</body>
+</html>
